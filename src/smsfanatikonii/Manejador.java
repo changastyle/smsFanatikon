@@ -44,7 +44,7 @@ public class Manejador
                 boolean condicion2 = (hoja.getCell(6,filaActual).getContents() != "HOME TEAM");
                 if( ! hoja.getCell(6,filaActual).getContents().trim().equalsIgnoreCase("HOME TEAM")   && ! hoja.getCell(6,filaActual).getContents().trim().equalsIgnoreCase(""))
                 {
-                    String horario = hoja.getCell(2,filaActual).getContents();
+                    String horario = hoja.getCell(2,filaActual).getContents().toString();
                     if(horario.trim().equalsIgnoreCase(""))
                     {
                         horario = ultimoHorario;
@@ -61,11 +61,35 @@ public class Manejador
                     String V = hoja.getCell(10,filaActual).getContents();
                     String LoE = hoja.getCell(14,filaActual).getContents();
                     String LoV = hoja.getCell(15,filaActual).getContents();
-                    String EoV = hoja.getCell(16,filaActual).getContents();
-                    String menosGoles = hoja.getCell(17,filaActual).getContents();
-                    if (menosGoles.trim().equalsIgnoreCase("")){ menosGoles = " --" ;}
-                    String masGoles = hoja.getCell(18,filaActual).getContents();
-                    if (masGoles.trim().equalsIgnoreCase("")){ masGoles = " --" ;}
+                    
+                    int cantidadColumnasDeLaHoja = hoja.getColumns();
+                    
+                    String EoV = "";
+                    if(cantidadColumnasDeLaHoja > 16)
+                    {
+                        EoV = hoja.getCell(16,filaActual).getContents();
+                    }
+                    
+                    String menosGoles = "";
+                    if(cantidadColumnasDeLaHoja > 17)
+                    {
+                        menosGoles = hoja.getCell(17,filaActual).getContents();
+                    }
+                    String masGoles = "";
+                    if(cantidadColumnasDeLaHoja > 17)
+                    {
+                        masGoles = hoja.getCell(18,filaActual).getContents();
+                    }
+                    
+                    
+                    if (menosGoles.trim().equalsIgnoreCase(""))
+                    { 
+                        menosGoles = " --" ;
+                    }
+                    if (masGoles.trim().equalsIgnoreCase(""))
+                    { 
+                        masGoles = " --" ;
+                    }
                     
                     
                     
@@ -96,7 +120,7 @@ public class Manejador
        }
        catch (Exception e)
        {
-           JOptionPane.showMessageDialog(null, "Error de conversion de archivo, contactarse con Nicolas Grossi (294) 154 - 530851");
+           JOptionPane.showMessageDialog(null, "Error de conversion de archivo, contactarse con Nicolas Grossi (294) 154 - 530851 ( " +  e.toString() + ")");
        }
        return salida;
    }
@@ -111,8 +135,8 @@ public class Manejador
        */
        return salida;
    }
-    public String formatoFecha(String raw)
-    {
+   public String formatoFecha(String raw)
+   {
         //String raw = "SATURDAY 03/12/2016";
         boolean pasoEspacio = false;
         String acumuladorPreEspacio = "";

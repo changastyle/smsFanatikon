@@ -13,7 +13,6 @@ public class SmsFanatikonII
 {
     public static void main(String[] args) throws IOException, BiffException
     {
-                
        Manejador m = new Manejador();
     }
     
